@@ -4,7 +4,7 @@
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-> **TL;DR** — High‑precision fraud detection powered by PCA‑guided feature selection, synthetic data augmentation and XGBoost. Reproducible, modular, and battle‑tested – *hire me already*.
+> **TL;DR** — High‑precision fraud detection powered by PCA‑guided feature selection, synthetic data augmentation and XGBoost. Reproducible, modular, and battle‑tested – *hire us already*.
 
 ---
 
