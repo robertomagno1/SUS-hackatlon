@@ -1,6 +1,6 @@
 # SUS-hackatlon
 
-# SUS — Smashing Unfair Schemes (Fraud Detection)
+# SUS — Stats Under the Stars (Fraud Detection)
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
