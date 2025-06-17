@@ -50,7 +50,7 @@
 
 ```bash
 # 1. Clone me (you know you want to)
-git clone https://github.com/YOUR-USERNAME/sus-fraud-detection.git
+git clone https://github.com/robertomagno1/SUS-hackatlon.git
 cd sus-fraud-detection
 
 # 2. Set up environment
