@@ -121,8 +121,6 @@ A heartfelt thank you to:
 
 * **Società Italiana di Statistica** ([SIS](https://www.societaitalianadistatistica.it)) for organizing SUS8 and providing an inspiring platform.
 * **Rulex** ([Rulex Official](https://www.rulex.ai)) for sponsoring and supplying compute resources.
-* **Collaborating Teams**: Shout-out to DataWizards, FraudFighters, and FinDetect for the friendly competition and knowledge-sharing.
-
 ---
 
 ## 🤝 Contributing
