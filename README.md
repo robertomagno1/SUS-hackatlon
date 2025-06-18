@@ -1,12 +1,10 @@
-# SUS-hackathon
+# 🏆 1st Place for Best Report at the SUS8 Hackathon! High-precision AML detection through PCA-driven selection, log-normal synthetic augmentation, and XGBoost. Reproducible, modular, and hackathon-tested—check our paper in reports/.** — 
 
 **SUS — Stats Under the Stars (Fraud Detection)**
 
 ### Introduction:
 In the AML domain, financial surveillance relies on accurate identification of rare laundering transactions within vast, noisy data. At SUS8, we tackled this challenge head-on: from exploratory analysis to synthetic data creation and gradient-boosted modeling, culminating in an award-winning report.
 
-
-TL;DR — 🏆 1st Place for Best Report at the SUS8 Hackathon! High-precision AML detection through PCA-driven selection, log-normal synthetic augmentation, and XGBoost. Reproducible, modular, and hackathon-tested—check our paper in reports/.** — 
 ---
 
 ## 🚀 Why This Matters
