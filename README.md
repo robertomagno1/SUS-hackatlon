@@ -1,4 +1,23 @@
-# SUS-hackatlon
+# SUS-hackathon
+
+**SUS — Stats Under the Stars (Fraud Detection)**
+
+### Introduction:
+In the AML domain, financial surveillance relies on accurate identification of rare laundering transactions within vast, noisy data. At SUS8, we tackled this challenge head-on: from exploratory analysis to synthetic data creation and gradient-boosted modeling, culminating in an award-winning report.
+
+
+TL;DR — 🏆 1st Place for Best Report at the SUS8 Hackathon! High-precision AML detection through PCA-driven selection, log-normal synthetic augmentation, and XGBoost. Reproducible, modular, and hackathon-tested—check our paper in reports/.** — 
+---
+
+## 🚀 Why This Matters
+
+* **Clean Slate EDA** – No nulls, a single self-loop, and a clear 1.24 % fraud imbalance.
+* **Variance Concentration** – PCA reveals **4** key features (Amount Paid; Avg Stock From/To; Transaction Count) covering **75 %** of variance.
+* **Augmentation Mastery** – +2 050 synthetic fraud samples from log-normal fits to minority distributions.
+* **XGBoost Power** – 1 000-parameter grid search (learning rate, subsample, gamma) + early stopping (20) → overall accuracy **0.76511**.
+* **Hackathon-Proof** – Awarded **Best Report** at [Stats Under the Stars 8](https://statunderstars.example.com) (#SUS8), outshining 50+ teams.
+
+---
 
 # SUS — Stats Under the Stars (Fraud Detection)
 
@@ -96,23 +115,35 @@ All scripts are parameterized via simple YAML configs in `config/`—no code edi
 
 ---
 
+## 🤝 Sponsors & Acknowledgements
+
+A heartfelt thank you to:
+
+* **Società Italiana di Statistica** ([SIS](https://www.societaitalianadistatistica.it)) for organizing SUS8 and providing an inspiring platform.
+* **Rulex** ([Rulex Official](https://www.rulex.ai)) for sponsoring and supplying compute resources.
+* **Collaborating Teams**: Shout-out to DataWizards, FraudFighters, and FinDetect for the friendly competition and knowledge-sharing.
+
+---
+
 ## 🤝 Contributing
 
-Improvements welcome—especially if they make things faster, cleaner, or funnier.
+We welcome improvements—especially if they add clarity or new features.
 
-1. Fork & branch.
-2. Run `pre-commit`.
-3. Submit a PR and reference an issue.
+1. Fork the repo & create a branch.
+2. Run `pre-commit` hooks.
+3. Open a PR and reference any relevant issue.
 
 ---
 
 ## 📄 License
 
-Released under the **MIT License**—see `LICENSE` for details.
+This project is licensed under the **MIT License**. See `LICENSE` for details.
 
 ---
 
 ## 🎓 Citation
+
+If SUS helps your research or product, please cite:
 
 Please cite our hackathon report if you build on this work:
 
