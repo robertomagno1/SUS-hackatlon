@@ -1,6 +1,6 @@
 # 🏆 1st Place for Best Report at the SUS8 Hackathon!
 **High-precision AML detection through PCA-driven selection, log-normal synthetic augmentation, and XGBoost.** <br>
-*Reproducible, modular, and hackathon-tested—check our paper in reports/.* — 
+*Reproducible, modular, and hackathon tested , check our paper in reports/.* — 
 
 **SUS — Stats Under the Stars (Fraud Detection)**
 
