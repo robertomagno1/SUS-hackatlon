@@ -118,7 +118,7 @@ Please cite our hackathon report if you build on this work:
 
 ```bibtex
 @techreport{mazzotta2025sus,
-  title        = {SUS — Smashing Unfair Schemes: Fraud Detection with Synthetic Augmentation and XGBoost},
+  title        = {SUS — Stat under the stars: Fraud Detection with Synthetic Augmentation and XGBoost},
   author       = {De Martino, Francesco and Mazzotta, Roberto Magno and Mazzocchi, Beatrice},
   year         = {2025},
   institution  = {Sapienza University of Rome}
