@@ -20,90 +20,101 @@
 
 ## 🗂 Repo Layout
 
-````text
+```text
 .
 ├── data/
-│   ├── raw/            # original .csv (🔒 never committed)
-│   └── processed/      # cleaned & augmented
-├── notebooks/
-│   ├── 01_eda.ipynb
-│   ├── 02_pca.ipynb
-│   ├── 03_synthetic_generation.ipynb
-│   └── 04_modelling.ipynb
+│   ├── train/            # original CSVs (🔒 do NOT commit)
+│   └── test/      
+├── references/
+│   ├── 1. Scalable Semi-Supervised Graph Learning Techniques for Anti Money Laundering.pdf
+│   ├── 2. Anti-money Laundering using Graph Techniques.pdf
+│   └── 3. Anomaly_Detection_in_Graphs_of_Bank_Transactions_f.pdf
 ├── src/
-│   ├── data/           # loading & preprocessing
-│   ├── features/       # feature engineering
-│   ├── models/         # training & inference
-│   └── visualization/  # plots
-├── reports/
-│   ├── figures/
-│   └── sus_fraud_report.pdf
-├── environment.yml
-├── Makefile
-├── LICENSE
+│   ├── report.tex  # source code for latex report 
+│   └──  main.ipynb # first notebook not commented
+│ final.ipynb    #final notebook commented
+│ report.pdf  # final report in pdf 
+├── LICENSE MIT
 └── README.md
-````
+```
 
 ---
 
 ## ⚡️ Quickstart
 
 ```bash
-# 1. Clone me (you know you want to)
+# 1. Clone repo
 git clone https://github.com/robertomagno1/SUS-hackatlon.git
-cd sus-fraud-detection
+cd SUS-hackatlon
 
-# 2. Set up environment
+# 2. Install dependencies
 conda env create -f environment.yml
 conda activate sus
 
-# 3. Run the full pipeline
-make run          # executes: clean, augment, train, evaluate
+# 3. Run full pipeline
+make run       # runs: clean → augment → train → evaluate
 
-# Or notebook your way through:
+# Or explore step-by-step:
 jupyter lab
 ```
 
 ---
 
-## 🔧 Pipeline in 60 sec
+## 🔧 Pipeline Overview (in 60 sec)
 
-1. **`clean_data.py`** — Removes anomalies, converts types, and laughs at nulls.
-2. **`augment.py`** — Fits log‑normal distributions to key fraud features and spits out 2 050 new bad boys.
-3. **`train.py`** — Runs grid search over `eta`, `subsample`, `gamma` (1 000 combos), with early stopping. Saves the best model to `models/xgb_best.json`.
-4. **`evaluate.py`** — Prints and plots confusion matrix, ROC, PR curve, and dumps a `metrics.json`.
+1. **clean\_data.py**
 
-All scripts are driven by **Hydra** configs in `config/` – tweak without touching code.
+   * Drop anomalies, enforce dtypes, verify no nulls.
+2. **augment.py**
+
+   * Fit log-normal to Amount Paid, Avg Stock From/To; estimate transaction-count $N\sim\mathcal{N}(\mu_N,\sigma_N)$; sample 2 050 synthetic frauds.
+3. **encode.py**
+
+   * Merge real + synthetic; compute `transaction_count`; factorize all categoricals; softmax-scale skewed numerics.
+4. **train.py**
+
+   * Grid search η∈{0.01,0.05,0.1,0.2}, subsample∈{0.7,0.8,1.0}, γ∈{0.5,1,3,5} via `xgb.cv` (1 000 rounds, early\_stop=20).
+   * Save best model to `models/xgb_best.json`.
+5. **evaluate.py**
+
+   * Compute AUC, Balanced Accuracy, Fraud Capture Rate @ Top 485; overall accuracy 0.76511; dump `metrics.json`.
+
+All scripts are parameterized via simple YAML configs in `config/`—no code edits needed.
 
 ---
 
-## 📊 Result Highlights (test set)
+## 📊 Test-Set Results
 
-| Metric     | Legit | Fraud |
-|-----------:|------:|------:|
-| Precision  | 0.92  | 0.84  |
-| Recall     | 0.96  | 0.88  |
-| F1‑score   | 0.94  | 0.86  |
+|                      Metric |   Value |
+| --------------------------: | ------: |
+|               **AUC (ROC)** |  0.9980 |
+|       **Balanced Accuracy** |  0.9978 |
+| **Fraud Capture Rate @485** | 14.78 % |
+|        **Overall Accuracy** | 0.76511 |
 
-<sub>*Numbers are illustrative; check the current `reports/metrics.json` for fresh results.*</sub>
+<sub>*Full metrics in `reports/metrics.json`.*</sub>
 
 ---
 
 ## 🤝 Contributing
 
-Pull requests welcome **if they make things faster, cleaner, or more sarcastic**. Open an issue first for major changes. Remember to run `pre-commit`.
+Improvements welcome—especially if they make things faster, cleaner, or funnier.
+
+1. Fork & branch.
+2. Run `pre-commit`.
+3. Submit a PR and reference an issue.
 
 ---
 
 ## 📄 License
 
-MIT — because life’s too short for restrictive licenses. See `LICENSE` for details.
+Released under the **MIT License**—see `LICENSE` for details.
 
 ---
 
 ## 🎓 Citation
 
-If this repo saves your thesis/job, cite the accompanying report:
+Please cite our hackathon report if you build on this work:
 
 ```bibtex
 @techreport{mazzotta2025sus,
@@ -114,8 +125,3 @@ If this repo saves your thesis/job, cite the accompanying report:
 }
 ```
 
----
-
-### 🙋‍♂️ Author — **Giuggini** (a.k.a. *Brutti Manzoni*)
-
-I turn messy data into clean wins. **Hire me, let’s kill fraud together.**
