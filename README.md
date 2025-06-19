@@ -2,7 +2,12 @@
 **High-precision AML detection through PCA-driven selection, log-normal synthetic augmentation, and XGBoost.** <br>
 *Reproducible, modular, and hackathon tested , check our paper in reports/.* — 
 
-**SUS — Stats Under the Stars competition organized by (Fraud Detection)**
+**SUS — Stats Under the Stars competition**
+<br> 
+### **organized by:**
+- 📎 **Rulex / Stats under the Stars**: [https://www.rulex.ai/stats-under-the-stars](https://www.rulex.ai/stats-under-the-stars)
+- 📊 **SIS – Società Italiana di Statistica**: [https://www.sis-statistica.it](https://www.sis-statistica.it)
+
 
 ### Introduction:
 In the AML domain, financial surveillance relies on accurate identification of rare laundering transactions within vast, noisy data. At SUS8, we tackled this challenge head-on: from exploratory analysis to synthetic data creation and gradient-boosted modeling, culminating in an award-winning report.
