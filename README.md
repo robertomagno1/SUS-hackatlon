@@ -5,7 +5,7 @@
 **SUS — Stats Under the Stars competition**
 <br> 
 ### **organized by:**
-- 📎 **Rulex / Stats under the Stars**: [https://www.rulex.ai/stats-under-the-stars](https://www.rulex.ai/stats-under-the-stars)
+- 📎 **Rulex**: [](https://www.rulex.ai)
 - 📊 **SIS – Società Italiana di Statistica**: [https://www.sis-statistica.it](https://www.sis-statistica.it)
 
 
