@@ -20,7 +20,7 @@ In the AML domain, financial surveillance relies on accurate identification of r
 * **Variance Concentration** – PCA reveals **4** key features (Amount Paid; Avg Stock From/To; Transaction Count) covering **75 %** of variance.
 * **Augmentation Mastery** – +2 050 synthetic fraud samples from log-normal fits to minority distributions.
 * **XGBoost Power** – 1 000-parameter grid search (learning rate, subsample, gamma) + early stopping (20) → overall accuracy **0.76511**.
-* **Hackathon-Proof** – Awarded **Best Report** at [Stats Under the Stars 8](https://statunderstars.example.com) (#SUS8), outshining 50+ teams.
+* **Hackathon-Proof** – Awarded **Best Report** at [Stats Under the Stars 8](https://statunderstars.example.com) (#SUS8), outshining 20+ teams.
 
 ---
 
