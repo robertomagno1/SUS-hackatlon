@@ -1,13 +1,4 @@
-Below is a **clean, modular, realistic README** written in Markdown.
-It incorporates the **problem description, dataset characteristics, methods, and key metrics**, using the information extracted from your uploaded report .
-
-You can paste this directly into your repository as `README.md`.
-
----
-
-# 🏆 SUS8 — Anti Money Laundering Detection
-
-**1st Place – Best Report Award at Stats Under the Stars 8 (SUS8)**
+# **1st Place – Best Report Award at Stats Under the Stars 8 (SUS8)**
 High-precision AML detection via **PCA-guided feature selection**, **log-normal synthetic augmentation**, and **XGBoost**.
 
 ---
