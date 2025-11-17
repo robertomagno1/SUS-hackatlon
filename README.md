@@ -1,154 +1,187 @@
-# 🏆 1st Place for Best Report at the SUS8 Hackathon!
-**High-precision Anti Money Laundering detection through PCA-driven selection, log-normal synthetic augmentation, and XGBoost.** <br>
-*Reproducible, modular, and hackathon tested , check our paper in reports/.* — 
+Below is a **clean, modular, realistic README** written in Markdown.
+It incorporates the **problem description, dataset characteristics, methods, and key metrics**, using the information extracted from your uploaded report .
 
-**SUS — Stats Under the Stars competition**
-<br> 
-### **organized by:**
-- 📎 **Rulex**:<br> [https://www.rulex.ai](https://www.rulex.ai)
-- 📊 **SIS – Società Italiana di Statistica**: [https://www.sis-statistica.it](https://www.sis-statistica.it)
-
-
-### Introduction:
-In the AML domain, financial surveillance relies on accurate identification of rare laundering transactions within vast, noisy data. At SUS8, we tackled this challenge head-on: from exploratory analysis to synthetic data creation and gradient-boosted modeling, culminating in an award-winning report.
+You can paste this directly into your repository as `README.md`.
 
 ---
 
-## 🚀 Why This Matters
+# 🏆 SUS8 — Anti Money Laundering Detection
 
-* **Clean Slate EDA** – No nulls, a single self-loop, and a clear 1.24 % fraud imbalance.
-* **Variance Concentration** – PCA reveals **4** key features (Amount Paid; Avg Stock From/To; Transaction Count) covering **75 %** of variance.
-* **Augmentation Mastery** – +2 050 synthetic fraud samples from log-normal fits to minority distributions.
-* **XGBoost Power** – 1 000-parameter grid search (learning rate, subsample, gamma) + early stopping (20) → overall accuracy **0.76511**.
-* **Hackathon-Proof** – Awarded **Best Report** at [Stats Under the Stars 8](https://statunderstars.example.com) (#SUS8), outshining 20+ teams.
+**1st Place – Best Report Award at Stats Under the Stars 8 (SUS8)**
+High-precision AML detection via **PCA-guided feature selection**, **log-normal synthetic augmentation**, and **XGBoost**.
 
 ---
 
-# SUS — Stats Under the Stars (Fraud Detection)
+## 📌 Problem Overview
 
-![Python](https://img.shields.io/badge/python-3.10%2B-blue) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+Financial institutions must detect **rare laundering events** hidden within tens of thousands of legitimate transactions. In the SUS8 challenge, the goal was to classify transactions as **fraudulent (Is Laundering = 1)** or **legitimate**, using only the provided tabular data.
 
-> **TL;DR** — High‑precision fraud detection powered by PCA‑guided feature selection, synthetic data augmentation and XGBoost. Reproducible, modular, and battle‑tested – *hire us already*.
-
----
-
-## 🚀 Why You Should Care
-
-- **Razor‑sharp EDA** – zero missing, one self‑loop, everything else spotless.  
-- **Variance on a diet** – PCA shows 4 features carry **75 %** of the story – we focus there.  
-- **Class‑imbalance annihilation** – *2050* log‑normal synthetic transactions to beef up the minority class.  
-- **XGBoost supremacy** – 1 000‑combo grid search + early stopping (20) → F1‑score that sings.  
-- **Reproducibility first** – same results, every machine, every time (Conda + seed).
+The dataset contains **55 307 transactions**, with only **685 fraud cases (1.24%)**, creating severe class imbalance . Effective modeling required careful feature analysis, augmentation, and robust validation.
 
 ---
 
-## 🗂 Repo Layout
+## 📊 Dataset Summary
 
-```text
-.
-├── data/
-│   ├── train/            # original CSVs (🔒 do NOT commit)
-│   └── test/      
-├── references/
-│   ├── 1. Scalable Semi-Supervised Graph Learning Techniques for Anti Money Laundering.pdf
-│   ├── 2. Anti-money Laundering using Graph Techniques.pdf
-│   └── 3. Anomaly_Detection_in_Graphs_of_Bank_Transactions_f.pdf
-├── src/
-│   ├── report.tex  # source code for latex report 
-│   └──  main.ipynb # first notebook not commented
-│ final.ipynb    #final notebook commented
-│ report.pdf  # final report in pdf 
-├── LICENSE MIT
-└── README.md
-```
+Key characteristics of the data (from EDA) include:
+
+* **No missing values**, clean schema, one self-loop transaction.
+* **Extreme class imbalance**: 1.24% fraudulent transactions (685 out of 55 307) .
+* **Critical features identified by PCA** explaining ~75% of variance:
+
+  * Avg Stock Account To
+  * Avg Stock Account From
+  * Transaction Count
+  * Amount Paid
+    (each contributing roughly 0.50 importance) .
 
 ---
 
-## ⚡️ Quickstart
+## 🧠 Methodology (Modular Overview)
 
-```bash
-# 1. Clone repo
-git clone https://github.com/robertomagno1/SUS-hackatlon.git
-cd SUS-hackatlon
+### **1. Exploratory Data Analysis**
 
-# 2. Install dependencies
-conda env create -f environment.yml
-conda activate sus
-
-# 3. Run full pipeline
-make run       # runs: clean → augment → train → evaluate
-
-# Or explore step-by-step:
-jupyter lab
-```
+* Verified no nulls and consistent datatypes.
+* Checked graph-like relationships; only one self-referential transaction.
+* Identified imbalance + key skewed distributions.
 
 ---
 
-## 🔧 Pipeline Overview (in 60 sec)
+### **2. Dimensionality Analysis – PCA**
 
-1. **clean\_data.py**
+PCA revealed that **four numerical features account for 75% of total variance**, guiding a minimal yet information-rich feature subset for modeling .
 
-   * Drop anomalies, enforce dtypes, verify no nulls.
-2. **augment.py**
+Methods used:
 
-   * Fit log-normal to Amount Paid, Avg Stock From/To; estimate transaction-count $N\sim\mathcal{N}(\mu_N,\sigma_N)$; sample 2 050 synthetic frauds.
-3. **encode.py**
-
-   * Merge real + synthetic; compute `transaction_count`; factorize all categoricals; softmax-scale skewed numerics.
-4. **train.py**
-
-   * Grid search η∈{0.01,0.05,0.1,0.2}, subsample∈{0.7,0.8,1.0}, γ∈{0.5,1,3,5} via `xgb.cv` (1 000 rounds, early\_stop=20).
-   * Save best model to `models/xgb_best.json`.
-5. **evaluate.py**
-
-   * Compute AUC, Balanced Accuracy, Fraud Capture Rate @ Top 485; overall accuracy 0.76511; dump `metrics.json`.
-
-All scripts are parameterized via simple YAML configs in `config/`—no code edits needed.
+* Standardization
+* PCA with explained-variance ranking
+* Feature-importance selection
 
 ---
 
-## 📊 Test-Set Results
+### **3. Synthetic Minority Augmentation**
+
+To counter extreme imbalance, the team generated **2 050 synthetic fraud samples** using **log-normal distributions** fitted on minority-class feature densities (Amount Paid, Avg Stock From/To) .
+
+Steps:
+
+* Estimated empirical density per feature.
+* Validated best-fit distributions (log-normal).
+* Sampled synthetic rows preserving the minority’s statistical shape.
+* Engineered **Transaction Count** as a new behavioral feature.
+
+---
+
+### **4. Preprocessing & Feature Engineering**
+
+* Removed non-informative columns.
+* Normalized skewed features (standard or softmax scaling).
+* Factorized categorical variables.
+* Constructed final modeling table of real + synthetic rows.
+
+---
+
+### **5. Modeling – XGBoost**
+
+Chosen for its robustness on tabular and imbalanced data.
+
+Methods applied:
+
+* **Grid Search** over:
+
+  * η ∈ {0.01, 0.05, 0.1, 0.2}
+  * subsample ∈ {0.7, 0.8, 1.0}
+  * γ ∈ {0.5, 1, 3, 5}
+* **1 000 boosting rounds** with **early stopping = 20**.
+* Evaluation focused on **precision, recall, and F1** of the fraud class rather than accuracy alone .
+
+---
+
+## 📐 Key Evaluation Metrics
+
+Final performance on the test set:
 
 |                      Metric |   Value |
 | --------------------------: | ------: |
 |               **AUC (ROC)** |  0.9980 |
 |       **Balanced Accuracy** |  0.9978 |
-| **Fraud Capture Rate @485** | 14.78 % |
+| **Fraud Capture Rate @485** |  14.78% |
 |        **Overall Accuracy** | 0.76511 |
 
-<sub>*Full metrics in `reports/metrics.json`.*</sub>
+> Metrics reflect the final XGBoost model with PCA-guided features + synthetic augmentation.
 
 ---
 
-## 🤝 Sponsors & Acknowledgements
+## 🗂 Repository Structure
 
-A heartfelt thank you to:
+```text
+.
+├── data/
+│   ├── train/       # raw training data (not committed)
+│   └── test/
+├── references/      # curated academic literature
+├── src/
+│   ├── report.tex
+│   └── main.ipynb   # initial prototype notebook
+├── final.ipynb      # polished, commented notebook
+├── report.pdf       # award-winning SUS8 final report
+├── config/          # YAML configs for modular pipeline
+├── environment.yml
+├── LICENSE
+└── README.md
+```
 
-* **Società Italiana di Statistica** ([SIS](https://www.societaitalianadistatistica.it)) for organizing SUS8 and providing an inspiring platform.
-* **Rulex** ([Rulex Official](https://www.rulex.ai)) for sponsoring and supplying compute resources.
 ---
 
-## 🤝 Contributing
+## ⚙️ Quickstart
 
-We welcome improvements—especially if they add clarity or new features.
+```bash
+git clone https://github.com/robertomagno1/SUS-hackatlon.git
+cd SUS-hackatlon
 
-1. Fork the repo & create a branch.
-2. Run `pre-commit` hooks.
-3. Open a PR and reference any relevant issue.
+conda env create -f environment.yml
+conda activate sus
+
+make run        # clean → augment → encode → train → evaluate
+```
+
+Or explore interactively:
+
+```bash
+jupyter lab
+```
+
+---
+
+## 🔄 Pipeline Summary
+
+1. **clean_data.py** — type enforcement, anomaly removal, dataset validation
+2. **augment.py** — fit log-normal; generate 2050 fraud samples
+3. **encode.py** — factorize categoricals, scale numerics, engineer transaction count
+4. **train.py** — XGBoost + grid search + early stopping
+5. **evaluate.py** — compute AUC, balanced accuracy, fraud-capture metrics
+
+Every step is parameterized through YAML configs for plug-and-play reproducibility.
+
+---
+
+## 🤝 Acknowledgements
+
+We thank:
+
+* **SIS – Società Italiana di Statistica** for organizing SUS8.
+* **Rulex** for sponsoring the event and providing computational resources.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License**. See `LICENSE` for details.
+Released under the **MIT License**.
 
 ---
 
-## 🎓 Citation
+## 📚 Citation
 
-If SUS helps your research or product, please cite:
-
-Please cite our hackathon report if you build on this work:
+If you use this repository or methodology, please cite our SUS8 report:
 
 ```bibtex
 @techreport{mazzotta2025sus,
@@ -159,3 +192,10 @@ Please cite our hackathon report if you build on this work:
 }
 ```
 
+---
+
+If you'd like, I can also create:
+✅ A shorter README
+✅ A more professional corporate-style README
+✅ A PyPI-ready or paper-ready version
+Just tell me the style you want!
